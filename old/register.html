@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Animated Background</title>
+	<link rel="stylesheet" type="text/css" href="css/register.css">
+</head>
+<body>
+	<div id="canvas-container" style="position: relative;width: 100vw;height: 100vh; overflow: hidden;">
+
+        <canvas id="canvas1" style="z-index: 1;position: absolute; top: 0; left: 0;"></canvas>
+        <script src="js/background.js"></script>
+        <div class="container">
+            <form>
+              <h1>注册</h1>
+              <div class="input-container">
+                <input type="text" name="username" required>
+                <label>用户名</label>
+              </div>
+              <div class="input-container">
+                <input type="email" name="email" required>
+                <label>电子邮件</label>
+              </div>
+              <div class="input-container">
+                <input type="password" name="password" required>
+                <label>密码</label>
+              </div>
+              <div class="input-container">
+                <input type="password" name="confirm-password" required>
+                <label>确认密码</label>
+              </div>
+              <button type="submit">注册</button>
+              <button type="submit" onmousedown="location.href='login.html'">已有账号？去登录</button>
+            </form>
+        </div>
+        
+    </div>
+	
+</body>
+</html>

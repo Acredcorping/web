@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" charset="ie-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会议管理系统 - 登录</title>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/login.js"></script>
+    <script type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="canvas-container" style="position: relative;width: 100vw;height: 100vh; overflow: hidden;">
+
+      <canvas id="canvas1" style="z-index: 1;position: absolute; top: 0; left: 0;"></canvas>
+      <script src="js/background.js"></script>
+
+      <div class="container">
+        <form>
+          <h1>登录</h1>
+          <div class="input-container">
+            <input type="text" id="username" required>
+            <label>用户名</label>
+          </div>
+          <div class="input-container">
+            <input type="password" id="password" required>
+            <label>密码</label>
+          </div>
+          <button id="login_submit_btn" type="submit">登录</button>
+          <button id="register_btn" type="submit" onmousedown="location.href='register.html'">注册</button>
+      </div>
+    </div>
+  </body>
+</html>
