@@ -8,7 +8,7 @@ let particles = [];
 let mouse = {
   x: null,
   y: null,
-  radius: (canvas.height / 80) * (canvas.width / 80)
+  radius: (canvas.height / 120) * (canvas.width / 120)
 };
 
 window.addEventListener("mousemove", function(e) {
@@ -24,7 +24,7 @@ window.addEventListener("mouseout", function(e) {
 window.addEventListener("resize", function() {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
-  mouse.radius = ((canvas.width / 80) * (canvas.height / 80));
+  mouse.radius = ((canvas.width / 120) * (canvas.height / 120));
   init();
 });
 
@@ -76,8 +76,8 @@ class Particle {
       }
     }
 
-    this.x += this.directionX;
-    this.y += this.directionY;
+    this.x += this.directionX * 0.45;
+    this.y += this.directionY * 0.45;
 
     this.draw();
   }
