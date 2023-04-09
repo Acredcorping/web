@@ -24,8 +24,23 @@ layui.use(['element', 'layer', 'util'], function(){
     
   });
 
+$(function() {
+    $("#nowTime").runTimer();
+})
+
+$("#changePwd").on("click", function() {
+    layer.open({
+        type: 2,
+        title: '修改密码',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['550px', '360px'],
+        content: "./pages/changePassword.html"
+    });
+})
+
 $(".menu a").on("click", function() {
     var url = $(this).attr("data-url");
     var iframe = $("#iframe");
     iframe.attr("src", url);
-    });
+})

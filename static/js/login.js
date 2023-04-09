@@ -9,17 +9,24 @@ $(function(){
         var username = $("#username").val();
         var password = $("#password").val();
         var message = "";
-        if(username != "123"){
-            message = "用户名错误！";
+        for(var i = 0; i < userArray.length; i++){
+            if(username == userArray[i].u_name){
+                if(password == userArray[i].u_pwd){
+                    location.href = "main.html";
+                    message = "success";
+                    break;
+                }
+                else{
+                    message = "密码错误";
+                    break;
+                }
+            }
         }
-        else if(password != "123"){
-            message = "密码错误！";
+        if(message == ""){
+            message = "用户名不存在";
         }
-        if(message != ""){
+        if(message != "success"){
             alert(message);
-        }
-        else{
-            location.href = "main.html";
         }
     })
 })
