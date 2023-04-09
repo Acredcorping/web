@@ -1,0 +1,16 @@
+[
+    {
+        "id": "10001",
+        "room_name": "测试",
+        "max_capacity": "50",
+        "city": "北京市 朝阳区",
+        "joinTime": "2023-04-01 11:11:42"
+    },
+    {
+        "id": "10002",
+        "room_name": "ceshi",
+        "max_capacity": "30",
+        "city": "北京市 通州区",
+        "joinTime": "2023-04-02 11:11:42"
+    }
+]
