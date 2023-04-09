@@ -8,48 +8,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="../static/layui-v2.6.8/layui/css/layui.css"  media="all">
   <link rel="stylesheet" href="../static/css/conferenceManagement.css">
+  <script src="../static/js/jquery-2.1.4.js"></script>
+  <script src="../static/layui-v2.6.8/layui/layui.js" charset="utf-8"></script>
+  <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
+  <script src="../static/js/conferenceManagement.js"></script>
+  <script src="../static/js/data.js"></script>
+
   <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
  
 <div class="table-body">
-  
-  <form class="layui-form layui-col-md12 we-search">
-    会议室搜索：
-    <div class="layui-inline">
-      <input class="layui-input" placeholder="会议室编号" name="start" id="start" lay-key="1">
-    </div>
-    <div class="layui-inline">
-      <input class="layui-input" placeholder="会议室名称" name="end" id="end" lay-key="2">
-    </div>
-    <div class="layui-inline">
-      <input type="text" name="username" placeholder="最大容纳人数" autocomplete="off" class="layui-input">
-    </div>
-    <button class="layui-btn" lay-submit="" lay-filter="sreach">
-      <i class="layui-icon layui-icon-search"></i>
-    </button>
-  </form>
-
-  <table class="layui-table" id="conference-table" lay-filter="test"></table>
-</div>
-
-<script type="text/html" id="toolbarDemo">
-  <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+  <div class="table-body-search">
+    <form class="layui-form" action="">
+      <div class="layui-form-item">
+        <label class="layui-form-label">会议室编号</label>
+        <div class="layui-input-inline">
+          <input type="text" name="room_id" lay-verify="title" autocomplete="off" placeholder="请输入编号" class="layui-input">
+        </div>
+        <label class="layui-form-label">会议室名称</label>
+        <div class="layui-input-inline">
+          <input type="text" name="room_name" lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-input-block">
+          <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">查找</button>
+        </div>
+      </div>
+      
+    </form>
   </div>
-</script>
- 
-<script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
-              
-          
-<script src="../static/layui-v2.6.8/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
-<script src="../static/js/conferenceManagement.js"></script>
+
+  <table class="layui-hide" id="conference-table" lay-filter="test"></table>
+
+  <script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+      <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+      <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+      <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    </div>
+  </script>
+   
+  <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  </script>
+  
+</div>
 
 
 </body>

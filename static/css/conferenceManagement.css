@@ -1,11 +1,14 @@
 .table-body {
     margin: 20px;
-    padding: 0;
+    padding: 0px;
     font-family: Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     background-color: #fff;
     color: #333;
+}
+.table-body-search{
+    margin: 20px;
 }
 
   

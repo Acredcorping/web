@@ -9,3 +9,15 @@ $.ajax({
         userArray = data;
     }
 })
+
+var roomArray;
+
+$.ajax({
+    url: "static/json/conferenceRoom.json",
+    dataType: "json",
+    data: "get",
+    async: false,
+    success: function(data){
+        roomArray = data;
+    }
+})

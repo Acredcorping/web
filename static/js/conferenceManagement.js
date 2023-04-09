@@ -1,6 +1,5 @@
 layui.use('table', function(){
     var table = layui.table;
-    console.log("ceshi ")
     table.render({
       elem: '#conference-table'
       ,url:'../static/json/conferenceRoom.json'
@@ -12,16 +11,24 @@ layui.use('table', function(){
         ,icon: 'layui-icon-tips'
       }]
       ,title: '用户数据表'
+      ,data: roomArray
       ,cols: [[
         {type: 'checkbox', fixed: 'left'}
-        ,{field:'id', title:'ID', fixed: 'left', sort: true}
+        ,{field:'room_id', title:'ID', fixed: 'left', sort: true}
         ,{field:'room_name', title:'会议室名称', edit: 'text'}
         ,{field:'max_capacity', title:'最大容纳人数', sort:true}
         ,{field:'city', title:'地址'}
         ,{field:'joinTime', title:'创建时间'}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
+        
       ]]
-      ,page: true
+      ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+        layout: ['prev', 'page', 'next', 'skip', 'count', 'limit'] //自定义分页布局
+        ,groups: 3 //只显示 1 个连续页码
+        ,first: false //不显示首页
+        ,last: false //不显示尾页
+      }
+
     });
     
     //头工具栏事件
@@ -50,7 +57,7 @@ layui.use('table', function(){
     //监听行工具事件
     table.on('tool(test)', function(obj){
       var data = obj.data;
-      //console.log(obj)
+      console.log(obj)
       if(obj.event === 'del'){
         layer.confirm('真的删除行么', function(index){
           obj.del();
