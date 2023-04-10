@@ -92,11 +92,15 @@ layui.use('table', function(){
     });
   });
 
-$("#addConferenceRoomButton").on("click", function() {
-  console.log("testttt")
-  layer.open({
-      type: 1,
 
-      content: "../pages/addConferenceRoom.html"
-  });
-})
+  $(function(){
+    $("#addConferenceRoomButton").on("click", function() {
+      console.log("testttt")
+      layer.open({
+          type: 2,
+    
+          content: "./addConferenceRoom.html"
+      });
+    })
+  })
+
