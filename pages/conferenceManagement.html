@@ -20,7 +20,6 @@
  
 <div class="table-body">
   <div class="layui-row">
-    <div class="layui-col-md9">
       <div class="table-body-search">
         <form class="layui-form" action="">
           <div class="layui-form-item">
@@ -38,17 +37,15 @@
           </div>
         </form>
       </div>
-    </div>
-    <div class="layui-col-md3">
-      <div class="layui-btn-container" style="margin-top: 20px;">
-        <button type="button" class="layui-btn layui-btn-danger">
-          <i class="layui-icon layui-icon-delete">批量删除</i> 
-        </button>
-        <button type="button" class="layui-btn" href="#" id="addConferenceRoomButton">
-          <i class="layui-icon layui-icon-add-circle-fine" id="addConferenceRoomButton">添加</i>
-        </button> 
-      </div>
-    </div>
+  </div>
+
+  <div class="layui-btn-container" >
+    <button type="button" class="layui-btn layui-btn-danger">
+      <i class="layui-icon layui-icon-delete">批量删除</i> 
+    </button>
+    <button type="button" class="layui-btn" href="#" id="addConferenceRoomButton">
+      <i class="layui-icon layui-icon-add-circle-fine" id="addConferenceRoomButton">添加</i>
+    </button> 
   </div>
 
   <table class="layui-hide" id="conference-table" lay-filter="test"></table>

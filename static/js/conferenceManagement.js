@@ -5,11 +5,7 @@ layui.use('table', function(){
       ,url:'../static/json/conferenceRoom.json'
       ,cellMinWidth: 80
       ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-      ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
-        title: '提示'
-        ,layEvent: 'LAYTABLE_TIPS'
-        ,icon: 'layui-icon-tips'
-      }]
+      ,defaultToolbar: ['filter', 'exports', 'print']
       ,title: '用户数据表'
       ,data: roomArray
       ,cols: [[
@@ -45,11 +41,6 @@ layui.use('table', function(){
         break;
         case 'isAll':
           layer.msg(checkStatus.isAll ? '全选': '未全选');
-        break;
-        
-        //自定义头工具栏右侧图标 - 提示
-        case 'LAYTABLE_TIPS':
-          layer.alert('这是工具栏右侧自定义的一个图标按钮');
         break;
       };
     });
@@ -98,7 +89,10 @@ layui.use('table', function(){
       console.log("testttt")
       layer.open({
           type: 2,
-    
+          title: '增加会议室',
+          shadeClose: true,
+          shade: 0.8,
+          area: ['550px', '360px'],
           content: "./addConferenceRoom.html"
       });
     })

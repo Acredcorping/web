@@ -18,6 +18,6 @@ $.ajax({
     data: "get",
     async: false,
     success: function(data){
-        roomArray = data;
+        roomArray = data; 
     }
 })
