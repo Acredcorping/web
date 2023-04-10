@@ -19,23 +19,36 @@
 <body>
  
 <div class="table-body">
-  <div class="table-body-search">
-    <form class="layui-form" action="">
-      <div class="layui-form-item">
-        <label class="layui-form-label">会议室编号</label>
-        <div class="layui-input-inline">
-          <input type="text" name="room_id" lay-verify="title" autocomplete="off" placeholder="请输入编号" class="layui-input">
-        </div>
-        <label class="layui-form-label">会议室名称</label>
-        <div class="layui-input-inline">
-          <input type="text" name="room_name" lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
-        </div>
-        <div class="layui-input-block">
-          <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">查找</button>
-        </div>
+  <div class="layui-row">
+    <div class="layui-col-md9">
+      <div class="table-body-search">
+        <form class="layui-form" action="">
+          <div class="layui-form-item">
+            <label class="layui-form-label">会议室编号</label>
+            <div class="layui-input-inline">
+              <input type="text" name="room_id" lay-verify="title" autocomplete="off" placeholder="请输入编号" class="layui-input">
+            </div>
+            <label class="layui-form-label">会议室名称</label>
+            <div class="layui-input-inline">
+              <input type="text" name="room_name" lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-block">
+              <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">查找</button>
+            </div>
+          </div>
+        </form>
       </div>
-      
-    </form>
+    </div>
+    <div class="layui-col-md3">
+      <div class="layui-btn-container" style="margin-top: 20px;">
+        <button type="button" class="layui-btn layui-btn-danger">
+          <i class="layui-icon layui-icon-delete">批量删除</i> 
+        </button>
+        <button type="button" class="layui-btn" href="#" id="addConferenceRoomButton">
+          <i class="layui-icon layui-icon-add-circle-fine" id="addConferenceRoomButton">添加</i>
+        </button> 
+      </div>
+    </div>
   </div>
 
   <table class="layui-hide" id="conference-table" lay-filter="test"></table>

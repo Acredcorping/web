@@ -15,7 +15,7 @@ layui.use('table', function(){
       ,cols: [[
         {type: 'checkbox', fixed: 'left'}
         ,{field:'room_id', title:'ID', fixed: 'left', sort: true}
-        ,{field:'room_name', title:'会议室名称', edit: 'text'}
+        ,{field:'room_name', title:'会议室名称'}
         ,{field:'max_capacity', title:'最大容纳人数', sort:true}
         ,{field:'city', title:'地址'}
         ,{field:'joinTime', title:'创建时间'}
@@ -62,17 +62,41 @@ layui.use('table', function(){
         layer.confirm('真的删除行么', function(index){
           obj.del();
           layer.close(index);
+          $.ajax({
+            url: '../static/json/conferenceRoom.json/data/' + data.room_id,
+            type: 'DELETE',
+            success: function(res){
+              if(res.code === 0){
+                // 删除成功，重新加载表格数据
+                table.reload('demo');
+                layer.close(index);
+              } else {
+                layer.msg(res.msg, {icon: 2});
+              }
+            }
+          });
         });
       } else if(obj.event === 'edit'){
         layer.prompt({
-          formType: 2
-          ,value: data.email
+          formType: 4
+          ,title: '编辑信息'
+          ,value: [data.room_name, data.max_capacity]
         }, function(value, index){
           obj.update({
-            email: value
+            room_name: value[0],
+            max_capacity: value[1],
           });
           layer.close(index);
         });
       }
     });
   });
+
+$("#addConferenceRoomButton").on("click", function() {
+  console.log("testttt")
+  layer.open({
+      type: 1,
+
+      content: "../pages/addConferenceRoom.html"
+  });
+})
