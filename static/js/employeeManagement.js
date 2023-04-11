@@ -5,24 +5,21 @@ layui.use('table', function(){
       elem: '#employeeTable'
       ,url:'../static/json/employees.json'
       ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-      ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
-        title: '提示'
-        ,layEvent: 'LAYTABLE_TIPS'
-        ,icon: 'layui-icon-tips'
-      }]
+      ,cellMinWidth: 80
+      ,defaultToolbar: ['filter', 'exports', 'print']
       ,title: '用户数据表'
       ,cols: [[
-        {type: 'checkbox', fixed: 'left'}
-        ,{field:'e_id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-        ,{field:'e_name', title:'姓名', width:120}
-        ,{field:'e_sex', title:'性别', width:80, sort: true}
-        ,{field:'e_age', title:'年龄', width:80, sort: true}
-        ,{field:'e_phoneNum', title:'电话', width:120}
-        ,{field:'e_email', title:'邮箱', width:150, templet: function(res){
+        {type: 'checkbox', fixed: 'left', align: "center"}
+        ,{field:'e_id', title:'ID', fixed: 'left', width: 80, unresize: true, sort: true, align: "center"}
+        ,{field:'e_name', title:'姓名', width: 80, align: "center"}
+        ,{field:'e_sex', title:'性别', sort: true, width: 80, align: "center"}
+        ,{field:'e_age', title:'年龄', sort: true, width: 80, align: "center"}
+        ,{field:'e_phoneNum', title:'电话', width:150, align: "center"}
+        ,{field:'e_email', title:'邮箱', templet: function(res){
           return '<em>'+ res.e_email +'</em>'
         }}
-        ,{field:'city', title:'地址', width:120}
-        ,{field:'joinTime', title:'加入时间', width:120}
+        ,{field:'e_address', title:'地址'}
+        ,{field:'e_addTime', title:'加入时间'}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
       ]]
       ,page: true
@@ -42,11 +39,6 @@ layui.use('table', function(){
         break;
         case 'isAll':
           layer.msg(checkStatus.isAll ? '全选': '未全选');
-        break;
-        
-        //自定义头工具栏右侧图标 - 提示
-        case 'LAYTABLE_TIPS':
-          layer.alert('这是工具栏右侧自定义的一个图标按钮');
         break;
       };
     });
