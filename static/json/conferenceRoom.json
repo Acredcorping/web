@@ -1,22 +1,24 @@
-
 {
     "code": 0,
     "msg": "",
     "count": 1000,
-    "data": [
-        {
-            "room_id": "10001",
-            "room_name": "测试",
-            "max_capacity": "50",
-            "city": "北京市 朝阳区",
-            "joinTime": "2023-04-01 11:11:42"
-        },
-        {
-            "room_id": "10002",
-            "room_name": "ceshi",
-            "max_capacity": "30",
-            "city": "北京市 通州区",
-            "joinTime": "2023-04-02 11:11:42"
-        }
-    ]
-  } 
+    "data": [{
+        "room_id": "10001",
+        "room_name": "测试",
+        "max_capacity": "50",
+        "city": "北京市 朝阳区",
+        "joinTime": "2023-04-01 11:11:42"
+    }, {
+        "room_id": "10002",
+        "room_name": "ceshi",
+        "max_capacity": "30",
+        "city": "北京市 通州区",
+        "joinTime": "2023-04-02 11:11:42"
+    }, {
+        "room_id": 10003,
+        "room_name": "111",
+        "max_capacity": "111",
+        "city": "111",
+        "joinTime": "2023/4/11 19:26:39"
+    }]
+}

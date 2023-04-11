@@ -86,7 +86,6 @@ layui.use('table', function(){
 
   $(function(){
     $("#addConferenceRoomButton").on("click", function() {
-      console.log("testttt")
       layer.open({
           type: 2,
           title: '增加会议室',

@@ -1,7 +1,7 @@
 var userArray;
 
 $.ajax({
-    url: "static/json/user.json",
+    url: "../static/json/user.json",
     dataType: "json",
     data: "get",
     async: false,
@@ -13,7 +13,7 @@ $.ajax({
 var roomArray;
 
 $.ajax({
-    url: "static/json/conferenceRoom.json",
+    url: "../static/json/conferenceRoom.json",
     dataType: "json",
     data: "get",
     async: false,

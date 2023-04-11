@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="../static/layui-v2.6.8/layui/css/layui.css">
   <script src="../static/js/jquery-2.1.4.js"></script>
   <script src="../static/layui-v2.6.8/layui/layui.js"></script>
+  <script src="../static/js/data.js"></script>
 </head>
 <body>
   <div class="layui-container" style="margin-top: 30px; display: flex; justify-content: center; align-items: center;">
@@ -13,26 +14,26 @@
       <div class="layui-form-item">
         <label class="layui-form-label">会议室名称</label>
         <div class="layui-input-block">
-          <input type="text" name="oldPassword" required lay-verify="required" placeholder="请输入会议室名称" autocomplete="off" class="layui-input">
+          <input type="text" name="new_room_name" required lay-verify="required" placeholder="请输入会议室名称" autocomplete="off" class="layui-input">
         </div>
       </div>
       <div class="layui-form-item">
-        <label class="layui-form-label" >最大容纳人数</label>
+        <label class="layui-form-label" >会议室人数</label>
         <div class="layui-input-block">
-          <input type="number" name="newPassword" required lay-verify="required" placeholder="请输入最大容纳人数" autocomplete="off" class="layui-input">
+          <input type="number" name="new_max_capacity" required lay-verify="required" placeholder="请输入最大容纳人数" autocomplete="off" class="layui-input">
         </div>
       </div>
       <div class="layui-form-item">
         <label class="layui-form-label">地址</label>
         <div class="layui-input-block">
-          <input type="text" name="confirmPassword" required lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input">
+          <input type="text" name="new_city" required lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input">
         </div>
       </div>
 
       
       <div class="layui-form-item">
         <div class="layui-input-block">
-          <button class="layui-btn" lay-submit lay-filter="updatePwd">提交</button>
+          <button class="layui-btn" lay-submit lay-filter="createNewRoom">提交</button>
           <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
       </div>
@@ -41,15 +42,47 @@
   </div>
   
   <script>
+
     layui.use(['form'], function() {
       var form = layui.form;
-
+      var windowName = "addConferenceRoom-" + layer.index
       // 监听提交
-      form.on('submit(updatePwd)', function(data) {
-        // 这里编写提交逻辑
-        return false; // 阻止表单跳转
-      });
-    });
+      form.on('submit(createNewRoom)', function(data) {
+        old_room = roomArray.data;
+        last_id = parseInt(old_room[old_room.length - 1].room_id) + 1;
+        const newRoom = {
+        room_id: last_id,
+        room_name: data.field.new_room_name,
+        max_capacity: data.field.new_max_capacity,
+        city: data.field.new_city,
+        joinTime: new Date().toLocaleString()
+        };
+        new_roomArray = roomArray.data;
+        new_roomArray.push(newRoom);
+
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:3000/save-room-data',
+          async: true,
+          data: JSON.stringify(new_roomArray),
+          contentType: 'application/json',
+          success: function(response) {
+            console.log(response);
+          },
+          error: function(error) {
+            console.error(error);
+          }
+        });
+
+        // 调用添加新房间数据的函数
+        layer.msg('创建成功！', {icon: 1, time: 2000}, function() {
+          var index = parent.layer.getFrameIndex(windowName); // 获取窗口索引
+          parent.layer.close(index); // 关闭弹窗
+        });
+      })
+
+
+  });
   </script>
 </body>
 </html>
