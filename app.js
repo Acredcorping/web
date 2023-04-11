@@ -8,7 +8,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //添加会议室
-app.post('/add-room-data', (req, res) => {
+app.post('/save-room-data', (req, res) => {
   const newRoom = req.body;
   const fs = require('fs');
     // 读取JSON文件
