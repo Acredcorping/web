@@ -4,8 +4,8 @@ $.ajax({
     url: "../static/json/user.json",
     dataType: "json",
     data: "get",
-    async: false,
-    success: function(data) {
+    async: true,
+    success: function (data) {
         userArray = data;
     }
 })
@@ -16,8 +16,20 @@ $.ajax({
     url: "../static/json/conferenceRoom.json",
     dataType: "json",
     data: "get",
-    async: false,
-    success: function(data){
-        roomArray = data; 
+    async: true,
+    success: function (data) {
+        roomArray = data;
+    }
+})
+
+var employeeArray;
+
+$.ajax({
+    url: "../static/json/employees.json",
+    dataType: "json",
+    data: "get",
+    async: true,
+    success: function (data) {
+        employeeArray = data;
     }
 })

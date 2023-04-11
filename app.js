@@ -33,6 +33,32 @@ app.post('/save-room-data', (req, res) => {
   
 });
 
+//添加雇员
+app.post('/save-employee-data', (req, res) => {
+  const newRoom = req.body;
+  const fs = require('fs');
+    // 读取JSON文件
+  fs.readFile('static/json/employees.json', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    // 解析JSON数据
+    const rooms = JSON.parse(data);
+    // 将data数组替换为新的房间数据数组
+    rooms.data = newRoom;
+    // 将更新后的JSON数据写回文件
+    fs.writeFile('static/json/employees.json', JSON.stringify(rooms), err => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log('Room data saved successfully.');
+    });
+  });
+  
+});
+
 //删除会议室
 app.post('/delete-room-data', (req, res) =>{
   const fs = require('fs');

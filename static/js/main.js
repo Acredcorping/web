@@ -39,8 +39,17 @@ $("#changePwd").on("click", function() {
     });
 })
 
-$(".menu a").on("click", function() {
-    var url = $(this).attr("data-url");
-    var iframe = $("#iframe");
-    iframe.attr("src", url);
+$(function(){
+  var currentUrl = sessionStorage.getItem('currentUrl');
+  if(currentUrl) {
+    $("#iframe").attr("src", currentUrl);
+  }
+
+  $(".menu a").on("click", function() {
+      var url = $(this).attr("data-url");
+      var iframe = $("#iframe");
+      iframe.attr("src", url);
+      sessionStorage.setItem('currentUrl', url);
+  })
 })
+

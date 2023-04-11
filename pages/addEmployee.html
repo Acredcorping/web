@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>添加员工</title>
+    <link rel="stylesheet" href="../static/layui-v2.6.8/layui/css/layui.css">
+</head>
+
+<body>
+    <div class="layui-container" style="margin-top: 20px; display: flex; justify-content: center; align-items: center;">
+        <div class="layui-row">
+            <div class="layui-col-md6 layui-col-md-offset3">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" lay-verify="required" autocomplete="off"
+                                placeholder="请输入员工姓名" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <select name="gender" lay-verify="required">
+                                <option value="">请选择</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">年龄</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="age" lay-verify="required" autocomplete="off"
+                                placeholder="请输入员工年龄" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">部门</label>
+                        <div class="layui-input-block">
+                            <select name="department" lay-verify="required">
+                                <option value=""></option>
+                                <option value="技术部">技术部</option>
+                                <option value="销售部">销售部</option>
+                                <option value="市场部">市场部</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">电话</label>
+                        <div class="layui-input-block">
+                            <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off"
+                                placeholder="请输入员工电话" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="email" lay-verify="required|email" autocomplete="off"
+                                placeholder="请输入员工邮箱" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="address" lay-verify="required" autocomplete="off"
+                                placeholder="请输入员工地址" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="addEmployee">提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script src="../static/layui-v2.6.8/layui/layui.js"></script>
+    <script src="../static/js/jquery-2.1.4.js"></script>
+    <script src="../static/js/data.js"></script>
+    <script src="../static/js/function-util.js"></script>
+    <script>
+        // 加载layui模块
+        layui.use(['form', 'laydate'], function () {
+            var form = layui.form,
+                laydate = layui.laydate;
+
+            // 渲染时间选择器
+            laydate.render({
+                elem: '#joinTime'
+            });
+
+            // 监听提交事件
+            form.on('submit(addEmployee)', function (data) {
+                console.log(data.field);
+                // 这里可以使用ajax将数据提交到后端进行保存
+                // 例如：$.post('/api/employee', data.field, function(res) { console.log(res); });
+                // 成功后跳转到员工列表页
+                old_employee = employeeArray.data;
+                last_id = parseInt(old_employee[old_employee.length - 1].e_id) + 1;
+                var newEmployee = {
+                    e_id: last_id,
+                    e_name: data.field.name,
+                    e_sex: data.field.gender,
+                    e_age: data.field.age,
+                    e_department: data.field.department,
+                    e_phoneNum: data.field.phone,
+                    e_email: data.field.email,
+                    e_address: data.field.address,
+                    e_addTime: new Date().toLocaleString()
+                };
+                new_employeeArray = employeeArray.data;
+                new_employeeArray.push(newEmployee);
+
+                json_attr(new_employeeArray, 'save-employee-data');
+            });
+        });
+    </script>
+</body>
+
+</html>
