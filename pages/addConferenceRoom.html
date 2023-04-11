@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>添加会议室</title>
@@ -9,63 +10,69 @@
   <script src="../static/js/data.js"></script>
   <script src="../static/js/function-util.js"></script>
 </head>
+
 <body>
   <div class="layui-container" style="margin-top: 30px; display: flex; justify-content: center; align-items: center;">
     <form class="layui-form" action="">
       <div class="layui-form-item">
         <label class="layui-form-label">会议室名称</label>
         <div class="layui-input-block">
-          <input type="text" name="new_room_name" required lay-verify="required" placeholder="请输入会议室名称" autocomplete="off" class="layui-input">
+          <input type="text" name="new_room_name" required lay-verify="required" placeholder="请输入会议室名称"
+            autocomplete="off" class="layui-input">
         </div>
       </div>
       <div class="layui-form-item">
-        <label class="layui-form-label" >会议室人数</label>
+        <label class="layui-form-label">会议室人数</label>
         <div class="layui-input-block">
-          <input type="number" name="new_max_capacity" required lay-verify="required" placeholder="请输入最大容纳人数" autocomplete="off" class="layui-input">
+          <input type="number" name="new_max_capacity" required lay-verify="required" placeholder="请输入最大容纳人数"
+            autocomplete="off" class="layui-input">
         </div>
       </div>
       <div class="layui-form-item">
         <label class="layui-form-label">地址</label>
         <div class="layui-input-block">
-          <input type="text" name="new_city" required lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input">
+          <input type="text" name="new_city" required lay-verify="required" placeholder="请输入地址" autocomplete="off"
+            class="layui-input">
         </div>
       </div>
 
-      
+
       <div class="layui-form-item">
         <div class="layui-input-block">
           <button class="layui-btn" lay-submit lay-filter="createNewRoom">提交</button>
           <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
       </div>
-      
+
     </form>
   </div>
-  
-  <script>
 
-    layui.use(['form'], function() {
+  <script>
+    layui.use(['form'], function () {
       var form = layui.form;
       
       // 监听提交
-      form.on('submit(createNewRoom)', function(data) {
+      form.on('submit(createNewRoom)', function (data) {
+
         old_room = roomArray.data;
         last_id = parseInt(old_room[old_room.length - 1].room_id) + 1;
         const newRoom = {
-        room_id: last_id,
-        room_name: data.field.new_room_name,
-        max_capacity: data.field.new_max_capacity,
-        city: data.field.new_city,
-        joinTime: new Date().toLocaleString()
+          room_id: last_id,
+          room_name: data.field.new_room_name,
+          max_capacity: data.field.new_max_capacity,
+          city: data.field.new_city,
+          joinTime: new Date().toLocaleString()
         };
         new_roomArray = roomArray.data;
         new_roomArray.push(newRoom);
-        
-        json_attr(roomArray.data, 'save-room-data');
+
+        json_attr(new_roomArray, 'save-room-data');
+        return false;
       })
 
 
-  });
+    });
   </script>
 </body>
+
 </html>

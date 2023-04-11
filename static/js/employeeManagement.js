@@ -14,6 +14,7 @@ layui.use('table', function(){
         ,{field:'e_name', title:'姓名', width: 80, align: "center"}
         ,{field:'e_sex', title:'性别', sort: true, width: 80, align: "center"}
         ,{field:'e_age', title:'年龄', sort: true, width: 80, align: "center"}
+        ,{field:'e_department', title:'部门', width: 100, align: "center"}
         ,{field:'e_phoneNum', title:'电话', width:150, align: "center"}
         ,{field:'e_email', title:'邮箱', templet: function(res){
           return '<em>'+ res.e_email +'</em>'
@@ -65,3 +66,16 @@ layui.use('table', function(){
       }
     });
   });
+
+  $(function(){
+    $("#addEmployee").on("click", function() {
+      layer.open({
+          type: 2,
+          title: '增加员工',
+          shadeClose: true,
+          shade: 0.8,
+          area: ['400px', '580px'],
+          content: "./addEmployee.html"
+      });
+    })
+  })
