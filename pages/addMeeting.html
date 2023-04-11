@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>预约会议</title>
+    <link rel="stylesheet" href="../static/layui-v2.6.8/layui/css/layui.css">
+    <script src="../static/layui-v2.6.8/layui/layui.js"></script>
+    <script src="../static/js/jquery-2.1.4.js"></script>
+</head>
+
+<body>
+
+    <div class="layui-container" style="margin-top: 20px;">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">会议名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="required" placeholder="请输入会议名称" autocomplete="off"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">会议人数</label>
+                <div class="layui-input-block">
+                    <input type="text" name="number" lay-verify="required|number" placeholder="请输入会议人数"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="address" lay-verify="required" placeholder="请输入地址" autocomplete="off"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="start" lay-verify="required" placeholder="请选择开始时间" autocomplete="off"
+                        class="layui-input" id="start-time">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">结束时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="end" lay-verify="required" placeholder="请选择结束时间" autocomplete="off"
+                        class="layui-input" id="end-time">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">负责人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="leader" lay-verify="required" placeholder="请输入负责人姓名" autocomplete="off"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">参会人员</label>
+                <div id="select_people" class="demo-transfer"></div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <script>
+        //日期时间选择器
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start-time', //指定元素
+                type: 'datetime'
+            });
+
+            laydate.render({
+                elem: '#end-time', //指定元素
+                type: 'datetime'
+            });
+        });
+
+        //穿梭框
+        layui.use(['transfer', 'form'], function () {
+            var transfer = layui.transfer,
+                form = layui.form;
+
+            //模拟数据
+            var data = [{
+                "value": "1",
+                "title": "张三"
+            }, {
+                "value": "2",
+                "title": "李四"
+            }, {
+                "value": "3",
+                "title": "王五"
+            }, {
+                "value": "4",
+                "title": "赵六"
+            }];
+
+            //渲染
+            transfer.render({
+                elem: '#select_people',
+                data: data,
+                title: ['可选人员', '已选人员'],
+                showSearch: true,
+                
+                parseData: function (res) {
+                    return {
+                        "value": res.value,
+                        "title": res.title,
+                        "disabled": res.disabled
+                    }
+                }
+            });
+
+            //监听提交
+            form.on('submit', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>
