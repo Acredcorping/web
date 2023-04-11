@@ -21,3 +21,15 @@ $.ajax({
         roomArray = data; 
     }
 })
+
+var meetArray;
+
+$.ajax({
+    url: "../static/json/meeting.json",
+    dataType: "json",
+    data: "get",
+    async: false,
+    success: function(data){
+        roomArray = data; 
+    }
+})

@@ -109,6 +109,32 @@ app.post('/delete-meeting-data', (req, res) =>{
 
 })
 
+//预约会议
+app.post('/save-meeting-data', (req, res) => {
+  const newMeet = req.body;
+  const fs = require('fs');
+    // 读取JSON文件
+  fs.readFile('static/json/meeting.json', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    // 解析JSON数据
+    const meetings = JSON.parse(data);
+    // 将data数组替换为新的房间数据数组
+    meetings.data = newMeet;
+    // 将更新后的JSON数据写回文件
+    fs.writeFile('static/json/meeting.json', JSON.stringify(meetings), err => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log('Meeting data saved successfully.');
+    });
+  });
+  
+});
+
 
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
