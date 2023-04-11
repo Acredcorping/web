@@ -7,6 +7,7 @@
   <script src="../static/js/jquery-2.1.4.js"></script>
   <script src="../static/layui-v2.6.8/layui/layui.js"></script>
   <script src="../static/js/data.js"></script>
+  <script src="../static/js/function-util.js"></script>
 </head>
 <body>
   <div class="layui-container" style="margin-top: 30px; display: flex; justify-content: center; align-items: center;">
@@ -59,21 +60,8 @@
         };
         new_roomArray = roomArray.data;
         new_roomArray.push(newRoom);
-
-        $.ajax({
-          type: 'POST',
-          url: 'http://localhost:3000/save-room-data',
-          async: true,
-          data: JSON.stringify(new_roomArray),
-          contentType: 'application/json',
-          success: function(response) {
-            console.log(response);
-          },
-          error: function(error) {
-            console.error(error);
-          }
-        });
-
+        
+        json_attr(roomArray.data, 'save-room-data');
       })
 
 
