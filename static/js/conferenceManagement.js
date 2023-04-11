@@ -54,8 +54,11 @@ layui.use('table', function(){
           obj.del();
           layer.close(index);
           $.ajax({
-            url: '../static/json/conferenceRoom.json/data/' + data.room_id,
-            type: 'DELETE',
+            url: 'http://localhost:3000/delete-room-data',
+            type: 'POST',
+            async: true,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
             success: function(res){
               if(res.code === 0){
                 // 删除成功，重新加载表格数据
