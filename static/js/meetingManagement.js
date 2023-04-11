@@ -2,7 +2,7 @@ layui.use('table', function(){
     var table = layui.table;
     table.render({
       elem: '#conference-table'
-      ,url:'../static/json/conferenceRoom.json'
+      ,url:'../static/json/meeting.json'
       ,cellMinWidth: 80
       ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
       ,defaultToolbar: ['filter', 'exports', 'print']
@@ -10,11 +10,14 @@ layui.use('table', function(){
       ,data: roomArray
       ,cols: [[
         {type: 'checkbox', fixed: 'left'}
-        ,{field:'room_id', title:'ID', fixed: 'left', sort: true}
-        ,{field:'room_name', title:'会议室名称'}
-        ,{field:'max_capacity', title:'最大容纳人数', sort:true}
-        ,{field:'city', title:'地址'}
-        ,{field:'joinTime', title:'创建时间'}
+        ,{field:'meet_id', title:'ID', fixed: 'left', sort: true}
+        ,{field:'meet_name', title:'会议名称'}
+        ,{field:'meet_capacity', title:'最大容纳人数', sort:true}
+        ,{field:'meet_location', title:'地址'} 
+        ,{field:'meet_startTime', title:'开始时间'}
+        ,{field:'meet_endTime', title:'结束时间'}
+        ,{field:'meet_booked_people', title:'负责人'}
+        ,{field:'meet_attend_people', title:'参会人员'}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
         
       ]]
@@ -49,7 +52,7 @@ layui.use('table', function(){
           obj.del();
           layer.close(index);
           $.ajax({
-            url: 'http://localhost:3000/delete-room-data',
+            url: 'http://localhost:3000/delete-meeting-data',
             type: 'POST',
             async: true,
             contentType: 'application/json',
@@ -87,11 +90,11 @@ layui.use('table', function(){
     $("#addConferenceRoomButton").on("click", function() {
       layer.open({
           type: 2,
-          title: '增加会议室',
+          title: '预约会议',
           shadeClose: true,
           shade: 0.8,
-          area: ['550px', '360px'],
-          content: "./addConferenceRoom.html"
+          area: ['900px', '550px'],
+          content: "./addMeeting.html"
       });
     })
 
@@ -101,7 +104,7 @@ layui.use('table', function(){
 
       layui.use('table', function(){
         var table = layui.table;
-        // 搜索名字包含“张三”的元素
+        // 搜索
         table.reload('conference-table', {
           where: {
             room_id: search_room_id,
