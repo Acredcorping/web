@@ -71,17 +71,18 @@ layui.use('table', function(){
           });
         });
       } else if(obj.event === 'edit'){
-        layer.prompt({
-          formType: 4
-          ,title: '编辑信息'
-          ,value: [data.room_name, data.max_capacity]
-        }, function(value, index){
-          obj.update({
-            room_name: value[0],
-            max_capacity: value[1],
-          });
-          layer.close(index);
-        });
+        layer.open({
+          type: 2,
+          title: '修改会议室信息',
+          shadeClose: true,
+          shade: 0.8,
+          area: ['550px', '360px'],
+          content: "./editConferenceRoom.html",
+          success: function(index, layero){
+            console.log(layeros);
+            layer.close(index);
+          }
+      });
       }
     });
   });
@@ -98,5 +99,23 @@ layui.use('table', function(){
           content: "./addConferenceRoom.html"
       });
     })
+
+    $("#search_room_button").on("click", function(){
+      var search_room_id = document.getElementById("search_room_id").value;
+      var search_room_name = document.getElementById("search_room_name").value;
+
+      layui.use('table', function(){
+        var table = layui.table;
+        // 搜索名字包含“张三”的元素
+        table.reload('conference-table', {
+          where: {
+            room_id: search_room_id,
+            room_name: search_room_name
+          }
+        });
+      });
+      
+    })
+
   })
 

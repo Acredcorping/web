@@ -14,7 +14,7 @@
       <div class="layui-form-item">
         <label class="layui-form-label">会议室名称</label>
         <div class="layui-input-block">
-          <input type="text" name="new_room_name" required lay-verify="required" placeholder="请输入会议室名称" autocomplete="off" class="layui-input">
+          <input id="edit_room_name" type="text" name="new_room_name" required lay-verify="required" placeholder="请输入会议室名称" autocomplete="off" class="layui-input">
         </div>
       </div>
       <div class="layui-form-item">
@@ -49,9 +49,11 @@
       // 监听提交
       form.on('submit(createNewRoom)', function(data) {
         old_room = roomArray.data;
-        last_id = parseInt(old_room[old_room.length - 1].room_id) + 1;
+        room_id = data.room_id;
+        console.log(data.field);
+
         const newRoom = {
-        room_id: last_id,
+        room_id: 10005,
         room_name: data.field.new_room_name,
         max_capacity: data.field.new_max_capacity,
         city: data.field.new_city,

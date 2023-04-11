@@ -21,20 +21,20 @@
 <div class="table-body">
   <div class="layui-row">
       <div class="table-body-search">
-        <form class="layui-form" action="">
-          <div class="layui-form-item">
+        <form class="layui-form" style="margin-bottom: 20px;">
+          <div class="layui-inline">
             <label class="layui-form-label">会议室编号</label>
             <div class="layui-input-inline">
-              <input type="text" name="room_id" lay-verify="title" autocomplete="off" placeholder="请输入编号" class="layui-input">
-            </div>
-            <label class="layui-form-label">会议室名称</label>
-            <div class="layui-input-inline">
-              <input type="text" name="room_name" lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-input-block">
-              <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">查找</button>
+              <input id="search_room_id" type="text" name="room_id" lay-verify="title" autocomplete="off" placeholder="请输入编号" class="layui-input">
             </div>
           </div>
+          <div class="layui-inline">
+            <label class="layui-form-label">会议室名称</label>
+            <div class="layui-input-inline">
+              <input id="search_room_name" type="text" name="room_name" lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+            </div>  
+          </div>
+          <button type="button" class="layui-btn layui-btn-normal" id="search_room_button">查找</button>
         </form>
       </div>
   </div>
