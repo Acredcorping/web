@@ -8,6 +8,7 @@
     <script src="../static/layui-v2.6.8/layui/layui.js"></script>
     <script src="../static/js/jquery-2.1.4.js"></script>
     <script src="../static/js/data.js"></script>
+    <script src="../static/js/function-util.js"></script>
 </head>
 
 <body>
@@ -17,43 +18,43 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">会议名称</label>
                 <div class="layui-input-block">
-                    <input id="new_meet_name" type="text" name="meet_name" lay-verify="required" placeholder="请输入会议名称" autocomplete="off"
-                        class="layui-input">
+                    <input id="new_meet_name" type="text" name="meet_name" lay-verify="required" placeholder="请输入会议名称"
+                        autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">会议人数</label>
                 <div class="layui-input-block">
-                    <input id="new_meet_capacity" type="number" name="meet_number" lay-verify="required|number" placeholder="请输入会议人数"
-                        autocomplete="off" class="layui-input">
+                    <input id="new_meet_capacity" type="number" name="meet_number" lay-verify="required|number"
+                        placeholder="请输入会议人数" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">地址</label>
                 <div class="layui-input-block">
-                    <input id="new_meet_location" type="text" name="meet_location" lay-verify="required" placeholder="请输入地址" autocomplete="off"
-                        class="layui-input">
+                    <input id="new_meet_location" type="text" name="meet_location" lay-verify="required"
+                        placeholder="请输入地址" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">开始时间</label>
                 <div class="layui-input-block">
-                    <input  type="text" name="meet_startTime" lay-verify="required" placeholder="请选择开始时间" autocomplete="off"
-                        class="layui-input" id="new_meet_startTime">
+                    <input type="text" name="meet_startTime" lay-verify="required" placeholder="请选择开始时间"
+                        autocomplete="off" class="layui-input" id="new_meet_startTime">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">结束时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="meet_endTime" lay-verify="required" placeholder="请选择结束时间" autocomplete="off"
-                        class="layui-input" id="new_meet_endTime">
+                    <input type="text" name="meet_endTime" lay-verify="required" placeholder="请选择结束时间"
+                        autocomplete="off" class="layui-input" id="new_meet_endTime">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">负责人</label>
                 <div class="layui-input-block">
-                    <input id="new_meet_booked_people" type="text" name="meet_booked_people" lay-verify="required" placeholder="请输入负责人姓名" autocomplete="off"
-                        class="layui-input">
+                    <input id="new_meet_booked_people" type="text" name="meet_booked_people" lay-verify="required"
+                        placeholder="请输入负责人姓名" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -62,7 +63,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button id="meet_add_button" class="layui-btn" lay-submit="">提交</button>
+                    <button id="meet_add_button" class="layui-btn" lay-submit lay-filter="submit_meeting">提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -91,28 +92,20 @@
             var transfer = layui.transfer,
                 form = layui.form;
 
-            //模拟数据
-            var data = [{
-                "value": "1",
-                "title": "张三"
-            }, {
-                "value": "2",
-                "title": "李四"
-            }, {
-                "value": "3",
-                "title": "王五"
-            }, {
-                "value": "4",
-                "title": "赵六"
-            }];
+            const names = employeeArray.data.map(item => item.e_name);
+            //将names数组转换成穿梭框需要的格式
+            const result = names.map((name, index) => ({
+                value: (index + 1).toString(),
+                title: name,
+            }));
 
-            //渲染
+            //渲染穿梭框
             transfer.render({
                 elem: '#new_meet_attend_people',
-                data: data,
+                data: result,
                 title: ['可选人员', '已选人员'],
                 showSearch: true,
-                
+                id: "select_people",
                 parseData: function (res) {
                     return {
                         "value": res.value,
@@ -123,24 +116,32 @@
             });
 
             //监听提交
-            form.on('submit', function (data) {
+            form.on('submit(submit_meeting)', function (data) {
+                console.log("监听");
                 old_meet = meetArray.data;
                 last_id = parseInt(old_meet[old_meet.length - 1].meet_id) + 1;
-                const newMeet = {
-                room_id: last_id,
-                meet_name: data.field.new_meet_name,
-                meet_capacity: data.field.new_meet_capacity,
-                meet_location: data.field.new_meet_location,
-                meet_startTime: data.field.new_meet_startTime,
-                meet_endTime: data.field.new_meet_endTime,
-                meet_booked_people: data.field.new_meet_booked_people,
-                meet_attend_people: data.field.new_meet_attend_people,
+                var tansfer_people = transfer.getData('select_people');
+                var result = tansfer_people.map(item => item.title).join('，');
+                console.log(result);
+
+                var newMeet = {
+                    meet_id: last_id,
+                    meet_name: data.field.meet_name,
+                    meet_capacity: data.field.meet_number,
+                    meet_location: data.field.meet_location,
+                    meet_startTime: data.field.meet_startTime,
+                    meet_endTime: data.field.meet_endTime,
+                    meet_booked_people: data.field.meet_booked_people,
+                    meet_attend_people: result,
                 };
                 new_meetArray = meetArray.data;
                 new_meetArray.push(newMeet);
-                console.log(newMeet);
+                console.log(JSON.stringify(new_meetArray));
+
+                json_attr(new_meetArray, 'save-meeting-data');
+
                 
-                json_attr(meetArray.data, 'save-meeting-data');
+                return false;
             });
         });
     </script>
