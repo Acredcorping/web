@@ -1,0 +1,14 @@
+/* 设置禁用input的样式 */
+input[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  /* 鼠标放上去变成禁用图标 */
+  input[disabled]:hover {
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 50%;
+    cursor: not-allowed;
+  }
+  
