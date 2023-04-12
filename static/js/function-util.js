@@ -14,10 +14,7 @@ function json_attr(data_list, json_url) {
     })
 }
 
-<<<<<<< HEAD
 //判断两个obj是否相同
-=======
->>>>>>> d93f60fb1deadd85bd4785006e6b1f0046d610f5
 function isObjectEqual(obj1, obj2) {
     if (Object.keys(obj1).length !== Object.keys(obj2).length) {
       return false;

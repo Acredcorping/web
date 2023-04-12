@@ -106,18 +106,15 @@ layui.use('table', function () {
         area: ['900px', '550px'],
         content: "./editMeeting.html",
         success: function (layero, index) {
-          var iframeWin = window[layero.find('iframe')[0]['name']];
+          // var iframeWin = window[layero.find('iframe')[0]['name']];
           $(layer.getChildFrame("#new_meet_id", index)).val(data.meet_id);
           $(layer.getChildFrame("#new_meet_name", index)).val(data.meet_name);
           $(layer.getChildFrame("#new_meet_capacity", index)).val(data.meet_capacity);
           $(layer.getChildFrame("#new_meet_location", index)).val(data.meet_location);
           $(layer.getChildFrame("#new_meet_startTime", index)).val(data.meet_startTime);
-          // iframeWin.layui.form.render('laydate');
           $(layer.getChildFrame("#new_meet_endTime", index)).val(data.meet_endTime);
-          // iframeWin.layui.form.render('laydate');
           $(layer.getChildFrame("#new_meet_booked_people", index)).val(data.meet_booked_people);
-          // $(layer.getChildFrame("#new_meet_attend_people", index)).val(data.result);
-          // iframeWin.layui.transfer.render('transfer');
+          //向子页面传参
           var childWindow = layero.find('iframe')[0].contentWindow;
           childWindow.postMessage(data.meet_attend_people, '*');
           
@@ -212,6 +209,7 @@ layui.use('table', function () {
       }
       return false;
     });
+    console.log(filteredData);
     //把这里的渲染换成初始化表格时的渲染即可，data: filteredData，其中的URL删掉不要
     table.render({
       elem: '#meeting-table',
