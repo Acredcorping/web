@@ -81,6 +81,96 @@ layui.use('table', function () {
     }
   });
 
+  //通过员工id模糊查找
+  $("#search-employee-id").on("keyup", function () {
+    console.log("keyup");
+    var keyword = document.getElementById("search-employee-id").value;
+    var regExp = RegExp(keyword, "i");
+    var tableData = employeeArray.data;
+    var filteredData = tableData.filter(function (item) {
+      for (var key in item) {
+        if (regExp.test(item[key])) {
+          return true;
+        }
+      }
+      return false;
+    });
+
+    table.render({
+      elem: '#employeeTable',
+      cellMinWidth: 80,
+      toolbar: '#toolbarDemo',
+      defaultToolbar: ['filter', 'exports', 'print'],
+      title: '用户数据表',
+      data: filteredData,
+      cols: [
+        [
+          { type: 'checkbox', fixed: 'left', align: "center" }
+          , { field: 'e_id', title: 'ID', fixed: 'left', width: 80, unresize: true, sort: true, align: "center" }
+          , { field: 'e_name', title: '姓名', width: 80, align: "center" }
+          , { field: 'e_sex', title: '性别', sort: true, width: 80, align: "center" }
+          , { field: 'e_age', title: '年龄', sort: true, width: 80, align: "center" }
+          , { field: 'e_department', title: '部门', width: 100, align: "center" }
+          , { field: 'e_phoneNum', title: '电话', width: 150, align: "center" }
+          , {
+            field: 'e_email', title: '邮箱', templet: function (res) {
+              return '<em>' + res.e_email + '</em>'
+            }
+          }
+          , { field: 'e_address', title: '地址' }
+          , { field: 'e_addTime', title: '加入时间' }
+          , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
+        ]
+      ],
+      page: true
+    });
+  })
+
+  //通过员工姓名模糊查找
+  $("#search-employee-name").on("keyup", function () {
+    console.log("keyup");
+    var keyword = document.getElementById("search-employee-name").value;
+    var regExp = RegExp(keyword, "i");
+    var tableData = employeeArray.data;
+    var filteredData = tableData.filter(function (item) {
+      for (var key in item) {
+        if (regExp.test(item[key])) {
+          return true;
+        }
+      }
+      return false;
+    });
+
+    table.render({
+      elem: '#employeeTable',
+      cellMinWidth: 80,
+      toolbar: '#toolbarDemo',
+      defaultToolbar: ['filter', 'exports', 'print'],
+      title: '用户数据表',
+      data: filteredData,
+      cols: [
+        [
+          { type: 'checkbox', fixed: 'left', align: "center" }
+          , { field: 'e_id', title: 'ID', fixed: 'left', width: 80, unresize: true, sort: true, align: "center" }
+          , { field: 'e_name', title: '姓名', width: 80, align: "center" }
+          , { field: 'e_sex', title: '性别', sort: true, width: 80, align: "center" }
+          , { field: 'e_age', title: '年龄', sort: true, width: 80, align: "center" }
+          , { field: 'e_department', title: '部门', width: 100, align: "center" }
+          , { field: 'e_phoneNum', title: '电话', width: 150, align: "center" }
+          , {
+            field: 'e_email', title: '邮箱', templet: function (res) {
+              return '<em>' + res.e_email + '</em>'
+            }
+          }
+          , { field: 'e_address', title: '地址' }
+          , { field: 'e_addTime', title: '加入时间' }
+          , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
+        ]
+      ],
+      page: true
+    });
+  })
+
   $("#batch-delete").on("click", function () {
     var checkStatus = table.checkStatus('employeeTable');
     // console.log(checkStatus.data);

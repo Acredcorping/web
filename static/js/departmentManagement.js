@@ -63,6 +63,76 @@ layui.use('table', function(){
       }
     });
 
+    //通过部门id模糊查找
+    $("#search-department-id").on("keyup", function () {
+      console.log("keyup");
+      var keyword = document.getElementById("search-department-id").value;
+      var regExp = RegExp(keyword, "i");
+      var tableData = departmentArray.data;
+      var filteredData = tableData.filter(function (item) {
+        for (var key in item) {
+          if (regExp.test(item[key])) {
+            return true;
+          }
+        }
+        return false;
+      });
+  
+      table.render({
+        elem: '#departmentTable',
+        cellMinWidth: 80,
+        toolbar: '#toolbarDemo',
+        defaultToolbar: ['filter', 'exports', 'print'],
+        title: '用户数据表',
+        data: filteredData,
+        cols: [
+          [
+            {type: 'checkbox', fixed: 'left', align: "center"}
+            ,{field:'d_id', title:'ID', fixed: 'left', width: 80, unresize: true, sort: true, align: "center"}
+            ,{field:'d_name', title:'部门名称', width: 140, align: "center"}
+            ,{field:'d_description', title:'部门描述', sort: true}
+            ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+          ]
+        ],
+        page: true
+      });
+    })
+
+    //通过部门名称模糊查找
+    $("#search-department-name").on("keyup", function () {
+      console.log("keyup");
+      var keyword = document.getElementById("search-department-name").value;
+      var regExp = RegExp(keyword, "i");
+      var tableData = departmentArray.data;
+      var filteredData = tableData.filter(function (item) {
+        for (var key in item) {
+          if (regExp.test(item[key])) {
+            return true;
+          }
+        }
+        return false;
+      });
+  
+      table.render({
+        elem: '#departmentTable',
+        cellMinWidth: 80,
+        toolbar: '#toolbarDemo',
+        defaultToolbar: ['filter', 'exports', 'print'],
+        title: '用户数据表',
+        data: filteredData,
+        cols: [
+          [
+            {type: 'checkbox', fixed: 'left', align: "center"}
+            ,{field:'d_id', title:'ID', fixed: 'left', width: 80, unresize: true, sort: true, align: "center"}
+            ,{field:'d_name', title:'部门名称', width: 140, align: "center"}
+            ,{field:'d_description', title:'部门描述', sort: true}
+            ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+          ]
+        ],
+        page: true
+      });
+    })
+  
     $("#batch-delete").on("click", function () {
       var checkStatus = table.checkStatus('departmentTable');
       // console.log(checkStatus.data);
@@ -75,13 +145,15 @@ layui.use('table', function(){
       // console.log(filtered_departmentArray);
       json_attr(filtered_departmentArray, "save-department-data");
     })
-  
-  });
 
-$(function () {
-  $("#addDepartment").on("click", function () {
-    layer.open({
-      type: 2,
+  });
+  
+  
+  
+  $(function () {
+    $("#addDepartment").on("click", function () {
+      layer.open({
+        type: 2,
       title: '增加部门',
       shadeClose: true,
       shade: 0.8,
