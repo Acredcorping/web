@@ -46,15 +46,49 @@ layui.use('table', function(){
           layer.close(index);
         });
       } else if(obj.event === 'edit'){
-        layer.prompt({
-          formType: 2
-          ,value: data.email
-        }, function(value, index){
-          obj.update({
-            email: value
-          });
-          layer.close(index);
-        });
+        // console.log(data);
+        layer.open({
+          type: 2,
+          title: '编辑员工',
+          shadeClose: true,
+          shade: 0.8,
+          area:['400px', '540px'],
+          content: "./editDepartment.html",
+          success: function(layero, index) {
+            $(layer.getChildFrame("#d_id", index)).val(data.d_id);
+            $(layer.getChildFrame("#d_name", index)).val(data.d_name);
+            $(layer.getChildFrame("#d_description", index)).val(data.d_description);
+          }
+        })
       }
     });
+
+    $("#batch-delete").on("click", function () {
+      var checkStatus = table.checkStatus('departmentTable');
+      // console.log(checkStatus.data);
+      // console.log(departmentArray.data);
+      var filtered_departmentArray = departmentArray.data.filter((obj1) => {
+        return !checkStatus.data.some((obj2) => {
+          return isObjectEqual(obj1, obj2);
+        });
+      });
+      // console.log(filtered_departmentArray);
+      json_attr(filtered_departmentArray, "save-department-data");
+    })
+  
   });
+
+$(function () {
+  $("#addDepartment").on("click", function () {
+    layer.open({
+      type: 2,
+      title: '增加部门',
+      shadeClose: true,
+      shade: 0.8,
+      area: ['600px', '420px'],
+      content: "./addDepartment.html"
+    });
+  })
+
+
+})

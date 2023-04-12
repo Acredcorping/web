@@ -49,8 +49,6 @@
                         <div class="layui-input-block">
                             <select name="department" lay-verify="required" id="e_department">
                                 <option value=""></option>
-                                <option value="技术部">技术部</option>
-                                <option value="销售部">销售部</option>
                             </select>
                         </div>
                     </div>
@@ -118,6 +116,15 @@
                 json_attr(employeeArray.data, 'save-employee-data');
 
             });
+        });
+
+        $(function () {
+            // console.log(departmentArray.data)
+            console.log($("select[name='department']"));
+            $.each(departmentArray.data, function (index, item) {
+                $("select[name='department']").append("<option value='" + item.d_name + "'>" + item.d_name + "</option>");
+            })
+            layui.form.render('select');
         });
     </script>
 </body>

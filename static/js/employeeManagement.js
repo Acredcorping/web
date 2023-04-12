@@ -56,15 +56,6 @@ layui.use('table', function () {
         layer.close(index);
       });
     } else if (obj.event === 'edit') {
-      // layer.prompt({
-      //   formType: 2
-      //   , value: data.e_email
-      // }, function (value, index) {
-      //   obj.update({
-      //     e_email: value
-      //   });
-      //   layer.close(index);
-      // });
       layer.open({
         type: 2,
         title: '编辑员工',
@@ -117,22 +108,3 @@ $(function () {
     });
   })
 })
-
-function isObjectEqual(obj1, obj2) {
-  if (Object.keys(obj1).length !== Object.keys(obj2).length) {
-    return false;
-  }
-  for (let key in obj1) {
-    if (obj1.hasOwnProperty(key) && obj2.hasOwnProperty(key)) {
-      if (typeof obj1[key] === "object" && typeof obj2[key] === "object") {
-        if (!isObjectEqual(obj1[key], obj2[key])) {
-          return false;
-        }
-      } else if (obj1[key] !== obj2[key]) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
