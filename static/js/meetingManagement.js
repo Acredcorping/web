@@ -73,7 +73,7 @@ layui.use('table', function () {
   //监听行工具事件
   table.on('tool(test)', function (obj) {
     var data = obj.data;
-    console.log(obj)
+
     if (obj.event === 'del') {
       layer.confirm('真的删除行么', function (index) {
         obj.del();
@@ -103,13 +103,28 @@ layui.use('table', function () {
         title: '修改会议室信息',
         shadeClose: true,
         shade: 0.8,
-        area: ['550px', '360px'],
-        content: "./editConferenceRoom.html",
-        success: function (index, layero) {
-          console.log(layeros);
-          layer.close(index);
+        area: ['900px', '550px'],
+        content: "./editMeeting.html",
+        success: function (layero, index) {
+          var iframeWin = window[layero.find('iframe')[0]['name']];
+          $(layer.getChildFrame("#new_meet_id", index)).val(data.meet_id);
+          $(layer.getChildFrame("#new_meet_name", index)).val(data.meet_name);
+          $(layer.getChildFrame("#new_meet_capacity", index)).val(data.meet_capacity);
+          $(layer.getChildFrame("#new_meet_location", index)).val(data.meet_location);
+          $(layer.getChildFrame("#new_meet_startTime", index)).val(data.meet_startTime);
+          // iframeWin.layui.form.render('laydate');
+          $(layer.getChildFrame("#new_meet_endTime", index)).val(data.meet_endTime);
+          // iframeWin.layui.form.render('laydate');
+          $(layer.getChildFrame("#new_meet_booked_people", index)).val(data.meet_booked_people);
+          // $(layer.getChildFrame("#new_meet_attend_people", index)).val(data.result);
+          // iframeWin.layui.transfer.render('transfer');
+          var childWindow = layero.find('iframe')[0].contentWindow;
+          childWindow.postMessage(data.meet_attend_people, '*');
+          
+
         }
       });
+
     }
   });
 
@@ -247,6 +262,21 @@ layui.use('table', function () {
       page: true
 
     });
+  })
+
+  //批量删除
+  $("#batch_delete_meet").on("click", function () {
+    console.log("test");
+    var checkStatus = table.checkStatus('meeting-table');
+    console.log(checkStatus.data);
+    console.log(meetArray.data);
+    var filtered_meetArray = meetArray.data.filter((obj1) => {
+      return !checkStatus.data.some((obj2) => {
+        return isObjectEqual(obj1, obj2);
+      });
+    });
+    console.log(filtered_meetArray);
+    json_attr(filtered_meetArray, "save-meeting-data");
   })
 });
 

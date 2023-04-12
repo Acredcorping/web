@@ -96,9 +96,12 @@ layui.use(['table', 'jquery'], function () {
         shade: 0.8,
         area: ['550px', '360px'],
         content: "./editConferenceRoom.html",
-        success: function (index, layero) {
-          console.log(layeros);
-          layer.close(index);
+        success: function (layero, index) {
+          var iframeWin = window[layero.find('iframe')[0]['name']];
+          $(layer.getChildFrame("#room_id", index)).val(data.room_id);
+          $(layer.getChildFrame("#room_name", index)).val(data.room_name);
+          $(layer.getChildFrame("#max_capacity", index)).val(data.max_capacity);
+          $(layer.getChildFrame("#city", index)).val(data.city);
         }
       });
     }
@@ -120,7 +123,7 @@ layui.use(['table', 'jquery'], function () {
       }
       return false;
     });
-    
+
     table.render({
       elem: '#conference-table',
       cellMinWidth: 80,
@@ -178,7 +181,7 @@ layui.use(['table', 'jquery'], function () {
       }
       return false;
     });
-    
+
     table.render({
       elem: '#conference-table',
       cellMinWidth: 80,
@@ -220,6 +223,22 @@ layui.use(['table', 'jquery'], function () {
 
     });
   })
+
+  //批量删除
+  $("#batch_delete_room").on("click", function () {
+    console.log("test");
+    var checkStatus = table.checkStatus('conference-table');
+    console.log(checkStatus.data);
+    console.log(roomArray.data);
+    var filtered_roomArray = roomArray.data.filter((obj1) => {
+      return !checkStatus.data.some((obj2) => {
+        return isObjectEqual(obj1, obj2);
+      });
+    });
+    console.log(filtered_roomArray);
+    json_attr(filtered_roomArray, "save-room-data");
+  })
+
 });
 
 

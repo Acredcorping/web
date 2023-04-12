@@ -53,9 +53,12 @@
       
       // 监听提交
       form.on('submit(createNewRoom)', function (data) {
-
         old_room = roomArray.data;
-        last_id = parseInt(old_room[old_room.length - 1].room_id) + 1;
+        if(old_room.length == 0){
+          last_id = 10001;
+        }else{
+          last_id = parseInt(old_room[old_room.length - 1].room_id) + 1;
+        }
         const newRoom = {
           room_id: last_id,
           room_name: data.field.new_room_name,

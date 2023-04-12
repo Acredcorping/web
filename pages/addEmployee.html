@@ -100,7 +100,11 @@
                 // 例如：$.post('/api/employee', data.field, function(res) { console.log(res); });
                 // 成功后跳转到员工列表页
                 old_employee = employeeArray.data;
-                last_id = parseInt(old_employee[old_employee.length - 1].e_id) + 1;
+                if(old_employee.length == 0){
+                    last_id = 1;
+                }else{
+                    last_id = parseInt(old_employee[old_employee.length - 1].e_id) + 1;
+                }
                 var newEmployee = {
                     e_id: last_id,
                     e_name: data.field.name,

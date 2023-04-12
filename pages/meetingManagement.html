@@ -13,6 +13,7 @@
   <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
   <script src="../static/js/meetingManagement.js"></script>
   <script src="../static/js/data.js"></script>
+  <script src="../static/js/function-util.js"></script>
 
   <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
@@ -41,7 +42,7 @@
   </div>
 
   <div class="layui-btn-container" >
-    <button type="button" class="layui-btn layui-btn-danger">
+    <button id="batch_delete_meet" type="button" class="layui-btn layui-btn-danger">
       <i class="layui-icon layui-icon-delete">批量删除</i> 
     </button>
     <button type="button" class="layui-btn" href="#" id="addConferenceRoomButton">

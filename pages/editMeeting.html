@@ -16,6 +16,13 @@
     <div class="layui-container" style="margin-top: 20px;">
         <form class="layui-form" action="">
             <div class="layui-form-item">
+                <label class="layui-form-label">id</label>
+                <div class="layui-input-block">
+                    <input type="text" name="id" lay-verify="required" autocomplete="off" class="layui-input"
+                        id="new_meet_id" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">会议名称</label>
                 <div class="layui-input-block">
                     <input id="new_meet_name" type="text" name="meet_name" lay-verify="required" placeholder="请输入会议名称"
@@ -59,8 +66,7 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">参会人员</label>
-                <div id="new_meet_attend_people" class="demo-transfer"></div>
-                <input type="hidden" id="myArray" name="myArray" value="">
+                <div id="new_meet_attend_people" class="demo-transfer" name="select_people"></div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
@@ -93,61 +99,66 @@
             var transfer = layui.transfer,
                 form = layui.form;
 
-            var names = employeeArray.data.map(item => item.e_name);
-            //将names数组转换成穿梭框需要的格式
-            var result = names.map((name, index) => ({
-                value: (index + 1).toString(),
-                title: name,
-            }));
+            // const names = employeeArray.data.map(item => item.e_name);
+            // //将names数组转换成穿梭框需要的格式
+            // const result = names.map((name, index) => ({
+            //     value: (index + 1).toString(),
+            //     title: name,
+            // }));
 
-            //渲染穿梭框
-            transfer.render({
-                elem: '#new_meet_attend_people',
-                data: result,
-                title: ['可选人员', '已选人员'],
-                showSearch: true,
-                id: "select_people",
-                parseData: function (res) {
-                    return {
-                        "value": res.value,
-                        "title": res.title,
-                        "disabled": res.disabled
+            window.addEventListener('message', function (event) {
+                var data = event.data;
+
+                var names = data.split("，");
+
+                var old_names = employeeArray.data.map(item => item.e_name);
+
+                var value = result = names.map((item) => old_names.indexOf(item) + 1);
+
+                var names = employeeArray.data.map(item => item.e_name);
+                //将names数组转换成穿梭框需要的格式
+                var result = names.map((name, index) => ({
+                    value: (index + 1).toString(),
+                    title: name,
+                }));
+                //渲染穿梭框,value是已选内容的index，例如["1", "4"]
+                transfer.render({
+                    elem: '#new_meet_attend_people',
+                    data: result,
+                    value: value,
+                    title: ['可选人员', '已选人员'],
+                    showSearch: true,
+                    id: "select_people",
+                    parseData: function (res) {
+                        return {
+                            "value": res.value,
+                            "title": res.title,
+                            "disabled": res.disabled
+                        }
                     }
-                }
+                });
+
             });
 
             //监听提交
             form.on('submit(submit_meeting)', function (data) {
-
-                old_meet = meetArray.data;
-                console.log(old_meet);
-                if (old_meet.length == 0) {
-                    last_id = 10001;
-                } else {
-                    last_id = parseInt(old_meet[old_meet.length - 1].meet_id) + 1;
-                }
+                console.log(JSON.stringify(data.field));
                 var tansfer_people = transfer.getData('select_people');
                 var result = tansfer_people.map(item => item.title).join('，');
                 console.log(result);
+                var target = meetArray.data.find((meet) => meet.meet_id === parseInt(data.field
+                    .id));
+                target.meet_name = data.field.meet_name;
+                target.meet_capacity = data.field.meet_number;
+                target.meet_location = data.field.meet_location;
+                target.meet_startTime = data.field.meet_startTime;
+                target.meet_endTime = data.field.meet_endTime;
+                target.meet_booked_people = data.field.meet_booked_people;
+                target.meet_attend_people = result;
+                console.log(JSON.stringify(employeeArray.data));
 
-                var newMeet = {
-                    meet_id: last_id,
-                    meet_name: data.field.meet_name,
-                    meet_capacity: data.field.meet_number,
-                    meet_location: data.field.meet_location,
-                    meet_startTime: data.field.meet_startTime,
-                    meet_endTime: data.field.meet_endTime,
-                    meet_booked_people: data.field.meet_booked_people,
-                    meet_attend_people: result,
-                };
-                new_meetArray = meetArray.data;
-                new_meetArray.push(newMeet);
-                console.log(JSON.stringify(new_meetArray));
+                json_attr(meetArray.data, 'save-meeting-data');
 
-                json_attr(new_meetArray, 'save-meeting-data');
-
-
-                return false;
             });
         });
     </script>
