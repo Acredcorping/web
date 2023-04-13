@@ -1,40 +1,52 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>会议管理系统 - 注册</title>
-	<link rel="stylesheet" type="text/css" href="./static/css/register.css">
-  <script src="static/js/background.js"></script>
-</head>
-<body>
-	<div id="canvas-container" style="position: relative;width: 100vw;height: 100vh; overflow: hidden;">
+<html lang="en">
 
-        <canvas id="canvas1" style="z-index: 1;position: absolute; top: 0; left: 0;"></canvas>
-        <script src="./login.html"></script>
-        <div class="container">
-            <form>
-              <h1>注册</h1>
-              <div class="input-container">
-                <input type="text" name="username" required>
-                <label>用户名</label>
-              </div>
-              <div class="input-container">
-                <input type="email" name="email" required>
-                <label>电子邮件</label>
-              </div>
-              <div class="input-container">
-                <input type="password" name="password" required>
-                <label>密码</label>
-              </div>
-              <div class="input-container">
-                <input type="password" name="confirm-password" required>
-                <label>确认密码</label>
-              </div>
-              <button type="submit">注册</button>
-              <button type="submit" onmousedown="location.href='login.html'">已有账号？去登录</button>
-            </form>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" charset="ie-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会议管理系统 - 注册</title>
+  <link rel="stylesheet" type="text/css" href="./static/css/register.css">
+  <script src="./static/js/jquery-2.1.4.js"></script>
+  <script type="text/javascript"></script>
+  <script src="./static/js/regisiter.js"></script>
+  <script src="./static/js/data.js"></script>
+  <script src="./static/js/function-util.js"></script>
+
+</head>
+
+<body>
+  <div id="canvas-container" style="position: relative;width: 100vw;height: 100vh; overflow: hidden;">
+
+    <canvas id="canvas1" style="z-index: 1;position: absolute; top: 0; left: 0;"></canvas>
+    <script src="./static/js/background.js"></script>
+
+    <div class="container">
+      <form>
+        <h1>注册</h1>
+        <div class="input-container">
+          <input id="register_username" type="text" name="username" required>
+          <label>用户名</label>
         </div>
-        
+        <div class="input-container">
+          <input type="email" name="email" >
+          <label>电子邮件</label>
+        </div>
+        <div class="input-container">
+          <input id="register_password" type="password" name="password" required>
+          <label>密码</label>
+        </div>
+        <div class="input-container">
+          <input id="confirm_register_password" type="password" name="confirm-password" required>
+          <label>确认密码</label>
+        </div>
+        <button type="submit" id="register_submit_button">注册</button>
+        <button type="submit" onmousedown="location.href='login.html'">已有账号？去登录</button>
+      </form>
     </div>
-	
+
+  </div>
+
 </body>
+
 </html>

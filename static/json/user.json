@@ -1,13 +1,9 @@
-[
-    {
-        "uid": "1",
-        "u_name": "admin",
-        "u_pwd": "admin"
-
-    },
-    {
-        "uid": "2",
-        "u_name": "dp",
-        "u_pwd": "123456"
-    }
-]
+[{
+    "u_id": 1,
+    "u_name": "admin",
+    "u_pwd": "admin"
+}, {
+    "u_id": 2,
+    "u_name": "dp",
+    "u_pwd": "123456"
+}]
