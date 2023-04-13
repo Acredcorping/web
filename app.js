@@ -59,6 +59,32 @@ app.post('/save-employee-data', (req, res) => {
   
 });
 
+//更改用户密码
+app.post('/save-user-data', (req, res) => {
+  const newRoom = req.body;
+  const fs = require('fs');
+    // 读取JSON文件
+  fs.readFile('static/json/user.json', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    // 解析JSON数据
+    const rooms = JSON.parse(data);
+    // 将data数组替换为新的房间数据数组
+    rooms.data = newRoom;
+    // 将更新后的JSON数据写回文件
+    fs.writeFile('static/json/user.json', JSON.stringify(rooms), err => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log('User data saved successfully.');
+    });
+  });
+  
+});
+
 //添加部门
 app.post('/save-department-data', (req, res) => {
   const newRoom = req.body;

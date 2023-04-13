@@ -41,8 +41,12 @@ $("#changePwd").on("click", function() {
 
 $(function(){
   var currentUrl = sessionStorage.getItem('currentUrl');
-  if(currentUrl) {
+  // console.log(typeof(currentUrl));
+  if(currentUrl !== "undefined") {
     $("#iframe").attr("src", currentUrl);
+  }
+  else {
+    $("#iframe").attr("src", "pages/welcome.html");
   }
 
   $(".menu a").on("click", function() {
@@ -53,3 +57,13 @@ $(function(){
   })
 })
 
+window.onload = function () {
+    var username = sessionStorage.getItem("username");
+    // console.log(username);
+    if(username == null){
+        location.href = "login.html";
+    }
+    else{
+      $("#user-name").html(username);
+    }
+}
