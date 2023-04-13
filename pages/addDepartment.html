@@ -14,25 +14,25 @@
 <body>
 
     <div class="layui-container" style="margin-top: 20px;">
-        <form class="layui-form" action="">
+        <form class="layui-form" action="return false;" onsubmit="return false;">
             <div class="layui-form-item">
                 <label class="layui-form-label">部门名称</label>
                 <div class="layui-input-block">
-                    <input id="new_meet_name" type="text" name="d_name" lay-verify="required" placeholder="请输入部门名称" autocomplete="off"
-                        class="layui-input">
+                    <input id="new_meet_name" type="text" name="d_name" lay-verify="required" placeholder="请输入部门名称"
+                        autocomplete="off" class="layui-input">
                 </div>
             </div>
-            
+
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">部门描述</label>
                 <div class="layui-input-block">
-                  <textarea placeholder="请输入部门描述" class="layui-textarea" name="d_description"></textarea>
+                    <textarea placeholder="请输入部门描述" class="layui-textarea" name="d_description"></textarea>
                 </div>
-              </div>
+            </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button id="addDepartment" class="layui-btn" lay-submit lay-filter="addDepartment">提交</button>
+                    <button type="submit" id="addDepartment" class="layui-btn" lay-submit="" lay-filter="addDepartment">提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -40,7 +40,7 @@
         </form>
     </div>
     <script>
-         layui.use(['form', 'laydate'], function () {
+        layui.use(['form', 'laydate'], function () {
             var form = layui.form,
                 laydate = layui.laydate;
 
@@ -64,6 +64,7 @@
                 console.log(JSON.stringify(new_departmentArray));
 
                 json_attr(new_departmentArray, 'save-department-data');
+                return false;
             });
         });
     </script>

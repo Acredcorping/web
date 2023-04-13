@@ -1,9 +1,23 @@
 $(function () {
+    var userArray;
+
+    $.ajax({
+        url: "./static/json/user.json",
+        dataType: "json",
+        data: "get",
+        async: false,
+        success: function (data) {
+            userArray = data;
+        }
+    })
+
     $("#register_submit_button").on("click", function () {
+        if($("#confirm_register_password").val() !== $("#register_password").val()){
+            return false;
+        }
         var users = userArray;
         var username = $("#register_username").val();
         var password = $("#register_password").val();
-        checkPwd();
         if (users.length == 0) {
             last_id = 1;
         } else {
@@ -19,13 +33,25 @@ $(function () {
         location.href = "login.html";
         return false;
     })
-    function checkPwd(){
-        var passwordInput = document.getElementById("register_password");
-        var confirmPasswordInput = document.getElementById("confirm_register_password");
-        confirmPasswordInput.addEventListener("input", function () {
-            if (confirmPasswordInput.value !== passwordInput.value) {
-                confirmPasswordInput.setCustomValidity("Passwords do not match");
-            }
-        });
-    }
 })
+function checkPwd() {
+    console.log("checkPwd");
+    // var passwordInput = document.getElementById("register_password");
+    // var confirmPasswordInput = document.getElementById("confirm_register_password");
+    // confirmPasswordInput.addEventListener("input", function () {
+    //     if (confirmPasswordInput.value !== passwordInput.value) {
+    //         confirmPasswordInput.setCustomValidity("Passwords do not match");
+    //     }
+    // });
+    if($("#confirm_register_password").val() !== $("#register_password").val()){
+        console.log("Passwords do not match");
+        $('#password_error').show();
+        $('#register_submit_button').attr('disabled', true);
+        return false;
+    }
+    else{
+        $('#password_error').hide();
+        $('#register_submit_button').attr('disabled', false);
+        return true;
+    }
+}
