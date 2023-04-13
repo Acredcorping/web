@@ -79,13 +79,43 @@
             //执行一个laydate实例
             laydate.render({
                 elem: '#new_meet_startTime', //指定元素
-                type: 'datetime'
+                type: 'datetime',
+                done: function (value, data) {
+                    // 在结束时间的回调函数中获取开始时间和结束时间的时间戳
+                    var startTime = new Date(value).getTime();
+                    var endTime = new Date($('#enew_meet_endTimend').val()).getTime();
+
+                    // 如果开始时间晚于结束时间，则弹出提示框并清空结束时间的输入框
+                    if (startTime >= endTime) {
+                        layer.msg('开始时间必须早于结束时间', {
+                            time: 2000,
+                            end: endReset
+                        });
+                    }
+                }
             });
 
             laydate.render({
                 elem: '#new_meet_endTime', //指定元素
-                type: 'datetime'
+                type: 'datetime',
+                done: function (value, data) {
+                    // 在结束时间的回调函数中获取开始时间和结束时间的时间戳
+                    var startTime = new Date($('#new_meet_startTime').val()).getTime();
+                    var endTime = new Date(value).getTime();
+
+                    // 如果开始时间晚于结束时间，则弹出提示框并清空结束时间的输入框
+                    if (startTime >= endTime) {
+                        layer.msg('开始时间必须早于结束时间', {
+                            time: 2000,
+                            end: endReset
+                        });                     
+                    }
+                }
             });
+
+            function endReset() {
+                $('#new_meet_endTime').val('');
+            }
         });
 
         //穿梭框
