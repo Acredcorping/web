@@ -24,6 +24,7 @@ $(function () {
         for (var i = 0; i < userArray.length; i++) {
             if (username == userArray[i].u_name) {
                 if (password == userArray[i].u_pwd) {
+                    sessionStorage.setItem("username", username);
                     location.href = "main.html";
                     message = "success";
                     break;

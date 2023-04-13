@@ -19,20 +19,7 @@
       <!-- 移动端显示 -->
       <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
         <i class="layui-icon layui-icon-spread-left"></i>
-      </li>
-      
-      <!-- <li class="layui-nav-item layui-hide-xs"><a href="">nav 1</a></li>
-      <li class="layui-nav-item layui-hide-xs"><a href="">nav 2</a></li>
-      <li class="layui-nav-item layui-hide-xs"><a href="">nav 3</a></li>
-      <li class="layui-nav-item">
-        <a href="javascript:;">nav groups</a>
-        <dl class="layui-nav-child">
-          <dd><a href="">menu 11</a></dd>
-          <dd><a href="">menu 22</a></dd>
-          <dd><a href="">menu 33</a></dd>
-        </dl>
-      </li> -->
-      
+      </li>      
       
     </ul>
     <ul class="layui-nav layui-layout-right">
@@ -40,7 +27,7 @@
       <li class="layui-nav-item layui-hide layui-show-md-inline-block">
         <a href="javascript:;">
           <i class="layui-icon layui-icon-face-smile"></i> 
-          admin
+          <span id="user-name">admin</span>
         </a>
         <dl class="layui-nav-child">
           <dd><a href="#" id="changePwd">修改密码</a></dd>
@@ -60,20 +47,19 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree" lay-filter="test">
-        <li class="layui-nav-item layui-nav-itemed">
+        <!-- <li class="layui-nav-item layui-nav-itemed">
           <a class="" href="javascript:;">个人中心</a>
           <dl class="layui-nav-child menu">
             <dd><a href="#" data-url="./pages/button.html">最新通知</a></dd>
             <dd><a href="#">我的预定</a></dd>
             <dd><a href="#">我的会议</a></dd>
           </dl>
-        </li>
+        </li> -->
         <li class="layui-nav-item menu">
           <a href="javascript:;">人员管理</a>
           <dl class="layui-nav-child">
             <dd><a href="#", data-url="./pages/departmentManagement.html">部门管理</a></dd>
             <dd><a href="#", data-url="./pages/employeeManagement.html">员工管理</a></dd>
-            <dd><a href="#">注册审批</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item menu">
