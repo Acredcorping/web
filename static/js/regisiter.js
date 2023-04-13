@@ -18,6 +18,18 @@ $(function () {
         var users = userArray;
         var username = $("#register_username").val();
         var password = $("#register_password").val();
+<<<<<<< HEAD
+        var passwordInput = document.getElementById("register_password");
+        var confirmPasswordInput = document.getElementById("confirm_register_password");
+        confirmPasswordInput.addEventListener("input", function () {
+            if (confirmPasswordInput.value !== passwordInput.value) {
+                confirmPasswordInput.setCustomValidity("Passwords do not match");
+                alert("Passwords do not match");
+                
+            }
+        });
+=======
+>>>>>>> 19798bbcad4181fff24106a9f0d81ecc8ee18bd7
         if (users.length == 0) {
             last_id = 1;
         } else {
@@ -33,6 +45,9 @@ $(function () {
         location.href = "login.html";
         return false;
     })
+<<<<<<< HEAD
+})
+=======
 })
 function checkPwd() {
     console.log("checkPwd");
@@ -55,3 +70,4 @@ function checkPwd() {
         return true;
     }
 }
+>>>>>>> 19798bbcad4181fff24106a9f0d81ecc8ee18bd7
