@@ -182,6 +182,7 @@ layui.use('table', function () {
     });
     console.log(filtered_employeeArray);
     json_attr(filtered_employeeArray, "save-employee-data");
+    return false;
   })
 
 });
@@ -196,5 +197,6 @@ $(function () {
       area: ['400px', '580px'],
       content: "./addEmployee.html"
     });
+    return false;
   })
 })

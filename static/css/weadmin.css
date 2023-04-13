@@ -1,5 +1,5 @@
 @charset "utf-8";
-@import "../../lib/layui/css/layui.css";
+@import "../layui-v2.6.8/layui/css/layui.css";
 * {
   margin: 0px;
   padding: 0px;
