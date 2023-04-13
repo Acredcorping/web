@@ -3,7 +3,15 @@ $(function () {
         var users = userArray;
         var username = $("#register_username").val();
         var password = $("#register_password").val();
-        checkPwd();
+        var passwordInput = document.getElementById("register_password");
+        var confirmPasswordInput = document.getElementById("confirm_register_password");
+        confirmPasswordInput.addEventListener("input", function () {
+            if (confirmPasswordInput.value !== passwordInput.value) {
+                confirmPasswordInput.setCustomValidity("Passwords do not match");
+                alert("Passwords do not match");
+                
+            }
+        });
         if (users.length == 0) {
             last_id = 1;
         } else {
@@ -19,13 +27,4 @@ $(function () {
         location.href = "login.html";
         return false;
     })
-    function checkPwd(){
-        var passwordInput = document.getElementById("register_password");
-        var confirmPasswordInput = document.getElementById("confirm_register_password");
-        confirmPasswordInput.addEventListener("input", function () {
-            if (confirmPasswordInput.value !== passwordInput.value) {
-                confirmPasswordInput.setCustomValidity("Passwords do not match");
-            }
-        });
-    }
 })
