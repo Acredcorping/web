@@ -21,6 +21,7 @@ app.post('/save-room-data', (req, res) => {
     const rooms = JSON.parse(data);
     // 将data数组替换为新的房间数据数组
     rooms.data = newRoom;
+    rooms.count = newRoom.length;
     // 将更新后的JSON数据写回文件
     fs.writeFile('static/json/conferenceRoom.json', JSON.stringify(rooms), err => {
       if (err) {
@@ -47,6 +48,7 @@ app.post('/save-employee-data', (req, res) => {
     const rooms = JSON.parse(data);
     // 将data数组替换为新的房间数据数组
     rooms.data = newRoom;
+    rooms.count = newRoom.length;
     // 将更新后的JSON数据写回文件
     fs.writeFile('static/json/employees.json', JSON.stringify(rooms), err => {
       if (err) {
@@ -61,7 +63,7 @@ app.post('/save-employee-data', (req, res) => {
 
 //更改用户密码
 app.post('/save-user-data', (req, res) => {
-  const newRoom = req.body;
+  var newRoom = req.body;
   const fs = require('fs');
     // 读取JSON文件
   fs.readFile('static/json/user.json', (err, data) => {
@@ -70,9 +72,9 @@ app.post('/save-user-data', (req, res) => {
       return;
     }
     // 解析JSON数据
-    const rooms = JSON.parse(data);
+    var rooms = JSON.parse(data);
     // 将data数组替换为新的房间数据数组
-    rooms.data = newRoom;
+    rooms = newRoom;
     // 将更新后的JSON数据写回文件
     fs.writeFile('static/json/user.json', JSON.stringify(rooms), err => {
       if (err) {
@@ -99,6 +101,7 @@ app.post('/save-department-data', (req, res) => {
     const rooms = JSON.parse(data);
     // 将data数组替换为新的房间数据数组
     rooms.data = newRoom;
+    rooms.count = newRoom.length;
     // 将更新后的JSON数据写回文件
     fs.writeFile('static/json/department.json', JSON.stringify(rooms), err => {
       if (err) {
@@ -132,6 +135,7 @@ app.post('/delete-room-data', (req, res) =>{
     if (index_to_delete !== -1) {
       // 如果找到了要删除的数据，则将其从数组中删除
       rooms.data.splice(index_to_delete, 1);
+      rooms.count = rooms.data.length;
 
       // 将更新后的JSON数据写回文件
       fs.writeFile('static/json/conferenceRoom.json', JSON.stringify(rooms), err => {
@@ -170,6 +174,7 @@ app.post('/delete-meeting-data', (req, res) =>{
     if (index_to_delete !== -1) {
       // 如果找到了要删除的数据，则将其从数组中删除
       meetings.data.splice(index_to_delete, 1);
+      meetings.count = meetings.data.length;
 
       // 将更新后的JSON数据写回文件
       fs.writeFile('static/json/meeting.json', JSON.stringify(meetings), err => {
@@ -201,6 +206,7 @@ app.post('/save-meeting-data', (req, res) => {
     const meetings = JSON.parse(data);
     // 将data数组替换为新的房间数据数组
     meetings.data = newMeet;
+    meetings.count = newMeet.length;
     // 将更新后的JSON数据写回文件
     fs.writeFile('static/json/meeting.json', JSON.stringify(meetings), err => {
       if (err) {
@@ -214,7 +220,7 @@ app.post('/save-meeting-data', (req, res) => {
 });
 
 //注册用户
-app.post('/save-user-data', (req, res) => {
+app.post('/save-register-data', (req, res) => {
   var newUser = req.body;
   const fs = require('fs');
     // 读取JSON文件

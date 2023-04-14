@@ -29,7 +29,7 @@ $(function () {
             "u_pwd": password
         }
         users.push(new_user);
-        json_attr(users, 'save-user-data');
+        json_attr(users, 'save-register-data');
         location.href = "login.html";
         return false;
     })

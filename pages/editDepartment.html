@@ -4,6 +4,21 @@
 <head>
     <meta charset="utf-8">
     <title>编辑部门</title>
+    <style>
+        /* 设置禁用input的样式 */
+        input[disabled] {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* 鼠标放上去变成禁用图标 */
+        input[disabled]:hover {
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: auto 50%;
+            cursor: not-allowed;
+        }
+    </style>
     <link rel="stylesheet" href="../static/layui-v2.6.8/layui/css/layui.css">
 </head>
 
@@ -14,24 +29,25 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">id</label>
                 <div class="layui-input-block">
-                    <input type="text" name="id" lay-verify="required" autocomplete="off"
-                        class="layui-input" id="d_id" disabled>
+                    <input type="text" name="id" lay-verify="required" autocomplete="off" class="layui-input" id="d_id"
+                        disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">部门名称</label>
                 <div class="layui-input-block">
-                    <input id="d_name" type="text" name="d_name" lay-verify="required" placeholder="请输入部门名称" autocomplete="off"
-                        class="layui-input">
+                    <input id="d_name" type="text" name="d_name" lay-verify="required" placeholder="请输入部门名称"
+                        autocomplete="off" class="layui-input">
                 </div>
             </div>
-            
+
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">部门描述</label>
                 <div class="layui-input-block">
-                  <textarea id="d_description" placeholder="请输入部门描述" class="layui-textarea" name="d_description"></textarea>
+                    <textarea id="d_description" placeholder="请输入部门描述" class="layui-textarea"
+                        name="d_description"></textarea>
                 </div>
-              </div>
+            </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
@@ -47,7 +63,7 @@
     <script src="../static/js/data.js"></script>
     <script src="../static/js/function-util.js"></script>
     <script>
-         layui.use(['form', 'laydate'], function () {
+        layui.use(['form', 'laydate'], function () {
             var form = layui.form,
                 laydate = layui.laydate;
 
@@ -59,7 +75,7 @@
             // 监听提交事件
             form.on('submit(editDepartment)', function (data) {
                 console.log(data.field);
-                
+
                 var target = departmentArray.data.find((department) => department.d_id === parseInt(data.field.id));
                 target.d_name = data.field.d_name;
                 target.d_description = data.field.d_description;

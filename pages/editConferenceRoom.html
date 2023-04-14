@@ -5,6 +5,21 @@
   <meta charset="utf-8">
   <title>修改会议室</title>
   <link rel="stylesheet" href="../static/layui-v2.6.8/layui/css/layui.css">
+  <style>
+    /* 设置禁用input的样式 */
+    input[disabled] {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    /* 鼠标放上去变成禁用图标 */
+    input[disabled]:hover {
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: auto 50%;
+      cursor: not-allowed;
+    }
+  </style>
   <script src="../static/js/jquery-2.1.4.js"></script>
   <script src="../static/layui-v2.6.8/layui/layui.js"></script>
   <script src="../static/js/data.js"></script>

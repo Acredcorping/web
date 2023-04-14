@@ -13,7 +13,7 @@ layui.use(['element', 'layer', 'util'], function(){
       ,menuRight: function(){
         layer.open({
           type: 1
-          ,content: '<div style="padding: 15px;">处理右侧面板的操作</div>'
+          ,content: '<div style="padding: 15px;">会议管理系统</div>'
           ,area: ['260px', '100%']
           ,offset: 'rt' //右上角
           ,anim: 5
@@ -42,11 +42,13 @@ $("#changePwd").on("click", function() {
 $(function(){
   var currentUrl = sessionStorage.getItem('currentUrl');
   // console.log(typeof(currentUrl));
-  if(currentUrl !== "undefined") {
-    $("#iframe").attr("src", currentUrl);
+  // console.log(currentUrl);
+  
+  if(currentUrl == "undefined" || currentUrl == null) {
+    $("#iframe").attr("src", "pages/welcome.html");
   }
   else {
-    $("#iframe").attr("src", "pages/welcome.html");
+    $("#iframe").attr("src", currentUrl);
   }
 
   $(".menu a").on("click", function() {

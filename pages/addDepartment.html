@@ -61,6 +61,7 @@
                 };
                 new_departmentArray = departmentArray.data;
                 new_departmentArray.push(newDepartment);
+                departmentArray.count ++;
                 console.log(JSON.stringify(new_departmentArray));
 
                 json_attr(new_departmentArray, 'save-department-data');
